@@ -1,0 +1,385 @@
+/* General Style */
+body {
+    margin: 0;
+    color: #444;
+    background-color: #ffffff;  /* same background as landing page */
+    font-family: Poppins, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 60px;
+    align-items: center;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: #6658EA;
+}
+
+.logo-container {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.subtitle {
+    font-size: 18px;   /* increased size */
+    color: #6b6b6b;
+    margin-top: -2px;
+    font-weight: 500;
+}
+
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+}
+
+.btn-primary {
+    padding: 10px 18px;
+    border: none;
+    background-color: #6658EA;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+/* Hero Section */
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:60px 10%;
+    min-height:70vh;
+
+    background:#ffffff;
+}
+
+.hero-text {
+    max-width: 45%;
+}
+
+.hero-text h1 {
+    font-size: 50px;
+    color: #333;
+}
+
+.hero-text p {
+    margin: 15px 0;
+    font-size: 17px;
+}
+
+.hero-img img {
+    width: 450px;
+    border-radius: 20px;
+}
+
+/* Features */
+.features {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.feature-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.feature-card {
+    width: 250px;
+    background: #fff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+.feature-card img {
+    width: 70px;
+}
+
+/* Testimonials */
+.testimonials {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.testimonial-box {
+    background: #FFF;
+    width: 60%;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Footer */
+footer {
+    background: #6658EA;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Background same as landing page */
+.about-body {
+    background-color: #FCF7F7; /* same soft pastel */
+    margin: 0;
+    font-family: Poppins, sans-serif;
+}
+
+/* Center Section */
+.about-section {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+/* Card Design */
+.about-card {
+    background: #ffffff;
+    width: 70%;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+    border: 1px solid #ececec;
+}
+
+.about-card h1 {
+    font-size: 38px;
+    text-align: center;
+    color: #333;
+}
+
+.about-card p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #555;
+    margin-top: 15px;
+}
+
+/* Highlight active menu */
+.nav-links .active {
+    color: #6d5dfc;
+    font-weight: 600;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 25px;     /* spacing between nav items */
+}
+
+.nav-links li a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #333;
+    transition: 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: #5a4ff3;   /* purple hover */
+}
+
+.nav-btn {
+    padding: 10px 20px;
+    border-radius: 25px;          /* rounded pill shape */
+    background-color: #5a4ff3;    /* purple */
+    color: white !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: #4a3fda;    /* darker purple on hover */
+    transform: translateY(-2px);  /* small lift */
+    box-shadow: 0 4px 10px rgba(90, 79, 243, 0.4);
+}
+
+.login-btn {
+    margin-left: 10px;
+}
+
+.signup-btn {
+    margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 25px;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+/* Background same as landing page */
+.about-body {
+    background-color: #FCF7F7; /* same soft pastel */
+    margin: 0;
+    font-family: Poppins, sans-serif;
+}
+
+/* Center Section */
+.about-section {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+/* Card Design */
+.about-card {
+    background: #ffffff;
+    width: 70%;
+    padding: 40px 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.12);
+    border: 1px solid #ececec;
+}
+
+.about-card h1 {
+    font-size: 38px;
+    text-align: center;
+    color: #333;
+}
+
+.about-card p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #555;
+    margin-top: 15px;
+}
+
+/* Highlight active menu */
+.nav-links .active {
+    color: #6d5dfc;
+    font-weight: 600;
+}
+
+/* ===== USER HOME PAGE ===== */
+
+.user-greeting {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.user-greeting h1 {
+    font-size: 34px;
+    color: #5A4FF3;
+}
+
+.user-greeting p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 5px;
+}
+
+/* Chatbot Card */
+.chat-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.chat-card {
+    width: 60%;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.chat-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.question-box {
+    background: #F3F0FF;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-size: 17px;
+    color: #444;
+}
+
+.btn-start {
+    display: block;
+    margin: 10px auto;
+    padding: 12px 30px;
+    background-color: #5A4FF3;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.btn-start:hover {
+    background-color: #493ee0;
+}
+
+.response-area {
+    margin-top: 20px;
+}
+
+.btn-submit {
+    margin-top: 20px;
+    background-color: #5A4FF3;
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.btn-analysis {
+    display: block;
+    margin: 60px auto;
+    background-color: #5A4FF3;
+    color: white;
+    padding: 14px 35px;
+    border-radius: 30px;
+    font-size: 18px;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.btn-analysis:hover {
+    background-color: #493ee0;
+    box-shadow: 0 6px 12px rgba(90, 79, 243, 0.3);
+}
+ 

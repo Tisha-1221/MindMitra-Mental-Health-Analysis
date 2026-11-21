@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Mental Health Analysis</title>
+    <link rel="stylesheet" href="../static/login_style.css">
+</head>
+
+<body>
+
+<div class="login-logo">
+    <h1>MindMitra</h1>
+    <p>Your Companion for Mental Wellness</p>
+</div>
+
+<div class="auth-container">
+    <h2>Login</h2>
+
+    <!-- ✅ FORM SUBMIT HANDLED SAFELY -->
+    <form onsubmit="loginUser(event)">
+        <input type="text" id="login_email" placeholder="Username or Email" required>
+        <input type="password" id="login_password" placeholder="Password" required>
+
+        <!-- IMPORTANT FIX -->
+        <button type="submit">Login</button>
+    </form>
+
+    <p class="switch">
+        Don’t have an account?
+        <a href="signup.html">Sign up</a>
+    </p>
+</div>
+
+<script>
+function loginUser(event) {
+    event.preventDefault(); // VERY IMPORTANT
+
+    const email = document.getElementById("login_email").value;
+    const password = document.getElementById("login_password").value;
+
+    fetch("http://127.0.0.1:5000/login", {
+        method: "POST",
+        credentials: "include",   // 🔥 THIS LINE
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email: email,
+            password: password
+        })
+    })
+
+    .then(res => res.json())
+    .then(data => {
+        if (data.message) {
+            window.location.href = "user_home.html";
+        } else {
+            alert(data.error);
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Server error. Try again.");
+    });
+}
+</script>
+
+
+</body>
+</html>

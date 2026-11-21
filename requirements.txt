@@ -1,0 +1,2 @@
+Flask Flask-Cors python-dotenv pandas numpy plotly streamlit
+scikit-learn joblib textblob

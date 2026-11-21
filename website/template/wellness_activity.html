@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wellness Activities | MindMitra</title>
+    <link rel="stylesheet" href="../static/activity.css">
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🌿 Wellness Activities</h1>
+    <p class="subtitle">Take a few minutes to relax, reflect, and reset.</p>
+
+    <!-- 🫁 Guided Breathing (UPGRADED – timer inside circle) -->
+    <div class="card breathing-card">
+        <h2>🫁 Guided Breathing</h2>
+
+        <div class="breathing-circle-advanced" id="breathingCircle">
+            <div class="breathing-text">
+                <div id="breathingPhase">Ready</div>
+                <div id="breathingTimer">4</div>
+            </div>
+        </div>
+
+        <button class="primary-btn" onclick="startBreathing()">Start</button>
+    </div>
+
+    <!-- 🙏 Gratitude Journal (UNCHANGED) -->
+    <div class="card">
+        <h2>🙏 Gratitude Prompt</h2>
+        <textarea id="gratitudeInput"
+            placeholder="Write one thing you are grateful for today..."></textarea>
+        <button class="primary-btn" onclick="saveGratitude()">Save</button>
+        <p id="gratitudeMsg"></p>
+    </div>
+
+    <!-- 🧠 Grounding Exercise (UNCHANGED) -->
+    <div class="card">
+        <h2>🧠 Grounding Exercise (5-4-3-2-1)</h2>
+        <p id="groundingText">Click next to begin</p>
+        <button class="primary-btn" onclick="nextGrounding()">Next</button>
+    </div>
+
+    <a href="user_home.html" class="back-btn">⬅ Back to Home</a>
+
+</div>
+
+<script src="../static/breathing.js"></script>
+
+<script>
+
+/* Guided Breathing */
+/* (keep your breathing code exactly as it is) */
+
+
+/* Gratitude Save — BACKEND CONNECTED */
+function saveGratitude() {
+    const text = document.getElementById("gratitudeInput").value;
+
+    if (!text.trim()) {
+        document.getElementById("gratitudeMsg").innerText =
+            "Please write something first 🌱";
+        return;
+    }
+
+    fetch("http://127.0.0.1:5000/save-gratitude", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ gratitude: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById("gratitudeMsg").innerText = data.message;
+        document.getElementById("gratitudeInput").value = "";
+    })
+    .catch(error => {
+        console.error(error);
+        document.getElementById("gratitudeMsg").innerText =
+            "Something went wrong 😔";
+    });
+}
+
+/* Grounding */
+const groundingSteps = [
+    "5 things you can see 👀",
+    "4 things you can feel ✋",
+    "3 things you can hear 👂",
+    "2 things you can smell 👃",
+    "1 thing you can taste 👅"
+];
+let gStep = 0;
+function nextGrounding() {
+    if (gStep < groundingSteps.length) {
+        document.getElementById("groundingText").innerText =
+            groundingSteps[gStep];
+        gStep++;
+    }
+}
+
+/* Sound */
+const sound = document.getElementById("calmSound");
+function toggleSound() {
+    sound.paused ? sound.play() : sound.pause();
+}
+</script>
+
+</body>
+</html>

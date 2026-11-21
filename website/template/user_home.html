@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Check-In | MindMitra</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../static/user_home.css">
+</head>
+
+<body>
+
+<!-- Sidebar Navigation -->
+<div class="sidebar">
+    <h2 class="side-logo">MindMitra</h2>
+    <ul>
+        <li><a href="user_home.html" class="active">📝 Daily Check-In</a></li>
+        <li><a href="#" onclick="openDashboard()">📊 My Wellness Insights</a></li>
+        <li><a href="wellness_activity.html">🌿 Wellness Activities</a></li>
+        <li><a href="index.html" onclick="logout()" class="logout">🚪 Logout</a></li>
+    </ul>
+</div>
+
+<!-- Main Content -->
+<div class="main-content">
+
+    <!-- Welcome Section -->
+    <div class="welcome-box">
+        <h2 id="welcomeUser">Welcome 👋</h2>
+        <p>Your daily wellness check-in helps us understand your emotional patterns better.</p>
+    </div>
+
+    <!-- Check-in Card -->
+    <div class="checkin-card">
+        <h2 class="checkin-title">Your Daily Check-In</h2>
+
+        <div id="question-box">
+
+            <div class="step" id="step-0">
+                <p class="question">How are you feeling today?</p>
+                <textarea id="feeling_text" placeholder="Type here..."></textarea>
+            </div>
+
+            <div class="step" id="step-1">
+                <p class="question">One positive thing today?</p>
+                <textarea id="positive_text"></textarea>
+            </div>
+
+            <div class="step" id="step-2">
+                <p class="question">Hours slept?</p>
+                <input type="number" id="sleep_hours" min="1" max="24">
+            </div>
+
+            <div class="step" id="step-3">
+                <p class="question">Sleep quality (1–10)</p>
+                <input type="range" id="sleep_quality" min="1" max="10" value="5"
+                       oninput="updateSliderValue(this)">
+                <p>Selected: <span id="sleep_quality_value">5</span></p>
+            </div>
+
+            <div class="step" id="step-4">
+                <p class="question">Mood (1–10)</p>
+                <input type="number" id="mood_score" min="1" max="10">
+            </div>
+
+            <div class="step" id="step-5">
+                <p class="question">Stress (1–10)</p>
+                <input type="number" id="stress_score" min="1" max="10">
+            </div>
+
+            <div class="step" id="step-6">
+                <p class="question">Energy (1–10)</p>
+                <input type="number" id="energy_score" min="1" max="10">
+            </div>
+
+            <div class="step" id="step-7">
+                <p class="question">Did you socialize?</p>
+                <select id="socializing">
+                    <option value="">Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="step" id="step-8">
+                <p class="question">How many hours did you spend on screens today?</p>
+                <input type="number" id="screen_time" min="0" max="24">
+            </div>
+
+            <div class="step" id="step-9">
+                <p class="question">Were you physically active today?</p>
+                <select id="physically_active">
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+            <div class="step" id="step-10">
+                <p class="question">How many hours did you use social media today?</p>
+                <input type="number" id="social_media_hours" min="0" max="24">
+            </div>
+
+            <div class="step" id="step-11">
+                <p class="question">Anything stressing you?</p>
+                <textarea id="anxiety_text"></textarea>
+            </div>
+            
+
+        </div>
+
+        <div class="btn-row">
+            <button class="back-btn" onclick="previousStep()">Back</button>
+            <button class="next-btn" onclick="nextStep()">Next</button>
+        </div>
+    </div>
+
+    <button class="analysis-btn" onclick="openDashboard()">
+        🧠 My Wellness Insights
+    </button>
+
+
+</div>
+
+<!-- ================== SCRIPTS ================== -->
+<script>
+let currentStep = 0;
+const steps = document.querySelectorAll(".step");
+
+function showStep(n) {
+    steps.forEach(step => step.style.display = "none");
+    steps[n].style.display = "block";
+    document.querySelector(".back-btn").style.display = n === 0 ? "none" : "inline-block";
+    document.querySelector(".next-btn").textContent =
+        n === steps.length - 1 ? "Finish" : "Next";
+}
+
+showStep(currentStep);
+
+function updateSliderValue(slider) {
+    document.getElementById(slider.id + "_value").innerText = slider.value;
+}
+
+function previousStep() {
+    if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+    }
+}
+
+function nextStep() {
+    if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+    } else {
+    fetch("http://127.0.0.1:5000/save-checkin", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            feeling_text: document.getElementById("feeling_text").value,
+            positive_text: document.getElementById("positive_text").value,
+            sleep_hours: document.getElementById("sleep_hours").value,
+            sleep_quality: document.getElementById("sleep_quality").value,
+            mood_score: document.getElementById("mood_score").value,
+            stress_score: document.getElementById("stress_score").value,
+            energy_score: document.getElementById("energy_score").value,
+            socializing: document.getElementById("socializing").value,
+            anxiety_text: document.getElementById("anxiety_text").value,
+            screen_time: document.getElementById("screen_time").value,
+            physically_active: document.getElementById("physically_active").value,
+            social_media_hours: document.getElementById("social_media_hours").value
+
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("✅ Daily check-in saved!");
+        window.location.reload();
+    })
+    .catch(err => {
+        console.error(err);
+        alert("❌ Failed to save check-in");
+    });
+}
+
+}
+</script>
+
+<script>
+fetch("http://127.0.0.1:5000/check-session", {
+    credentials: "include"   // 🔥 REQUIRED
+})
+.then(res => res.json())
+.then(data => {
+    if (!data.logged_in) {
+        window.location.href = "login.html";
+    } else {
+        document.getElementById("welcomeUser").innerText =
+            "Welcome, " + data.name + " 👋";
+    }
+});
+</script>
+
+<script>
+function logout() {
+    fetch("http://127.0.0.1:5000/logout")
+    .then(() => window.location.href = "login.html");
+}
+</script>
+
+<script>
+function openDashboard() {
+    fetch("http://127.0.0.1:5000/current-user", {
+        method: "GET",
+        credentials: "include"
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.user_id) {
+            window.open(`http://127.0.0.1:8501/?user_id=${data.user_id}`, "_blank");
+        } else {
+            alert("You are not logged in.");
+        }
+    })
+    .catch(error => {
+        console.error("Error:", error);
+        alert("Something went wrong.");
+    });
+}
+</script>
+
+<script>
+function openInsights() {
+    fetch("http://127.0.0.1:5000/check-session", {
+        credentials: "include"
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.logged_in) {
+            window.open("http://localhost:8501/?user_id=" + data.user_id, "_blank");
+        } else {
+            alert("User not logged in");
+        }
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Unable to open insights");
+    });
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up | Mental Health Analysis</title>
+
+    <!-- Correct CSS path as per your structure -->
+    <link rel="stylesheet" href="../static/login_style.css">
+</head>
+
+<body>
+
+    <!-- ⭐ MindMitra Logo + Tagline -->
+    <div class="login-logo">
+        <h1>MindMitra</h1>
+        <p>Your Companion for Mental Wellness</p>
+    </div>
+
+    <!-- ⭐ Signup Card -->
+    <div class="auth-container">
+        <h2>Create Account</h2>
+
+        <!-- ✅ FORM WITH INPUTS (FIXED) -->
+        <form onsubmit="signupUser(event)">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Password" required>
+            <input type="password" placeholder="Confirm Password" required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <!-- ✅ Switch to Login -->
+        <p class="switch">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+    </div>
+
+    <!-- ✅ Redirect Logic -->
+   <script>
+   function signupUser(event) {
+   	event.preventDefault(); // stop page reload
+
+    	const name = document.querySelector('input[placeholder="Full Name"]').value;
+    	const email = document.querySelector('input[placeholder="Email"]').value;
+    	const password = document.querySelector('input[placeholder="Password"]').value;
+    	const confirmPassword = document.querySelector('input[placeholder="Confirm Password"]').value;
+
+    	if (!name || !email || !password || !confirmPassword) {
+        	alert("Please fill all fields");
+        	return;
+    	}
+
+    	if (password !== confirmPassword) {
+        	alert("Passwords do not match");
+        	return;
+    	}
+
+    	fetch("http://127.0.0.1:5000/signup", {
+        	method: "POST",
+			credentials: "include",   // 🔥 REQUIRED
+        	headers: {
+            		"Content-Type": "application/json"
+        	},
+        	body: JSON.stringify({
+            		name: name,
+            		email: email,
+            		password: password
+        	})
+    	})
+    	.then(response => response.json())
+    	.then(data => {
+        	if (data.message) {
+            		// ✅ Signup successful
+            		window.location.href = "user_home.html";
+        	} else {
+            		alert(data.error);
+        	}
+    	})
+    	.catch(error => {
+        	console.error(error);
+        	alert("Server error. Please try again.");
+    	});
+   }
+   </script>
+
+
+</body>
+</html>
