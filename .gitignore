@@ -1,0 +1,71 @@
+
+# ==========================================
+# PYTHON CACHE FILES
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# ==========================================
+# JUPYTER NOTEBOOK FILES
+# ==========================================
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# ==========================================
+# VIRTUAL ENVIRONMENTS
+# ==========================================
+.env
+.venv/
+venv/
+env/
+
+# ==========================================
+# SECRETS AND CONFIGURATION
+# ==========================================
+.env.*
+!.env.example
+secrets.toml
+
+# ==========================================
+# DATABASE FILES
+# ==========================================
+# Ignore local databases by default
+*.db
+*.sqlite
+*.sqlite3
+
+# Keep the synthetic database required by the dashboard
+!database(Synthetic)/mindmitra.db
+
+# ==========================================
+# ORIGINAL / PRIVATE DATA
+# ==========================================
+data/
+!data(Synthetic)/
+!data(Synthetic)/**
+
+# ==========================================
+# EDITOR AND IDE FILES
+# ==========================================
+.vscode/
+.idea/
+
+# ==========================================
+# OPERATING SYSTEM FILES
+# ==========================================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# LOGS AND TEMPORARY FILES
+# ==========================================
+*.log
+*.tmp
+*.bak
+
+# ==========================================
+# MODEL TRAINING TEMPORARY FILES
+# ==========================================
+*.joblib
